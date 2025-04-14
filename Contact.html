@@ -505,22 +505,6 @@
   <!-- 💌 Contact Section with Side Info -->
   <!-- 💌 Contact Section -->
 <section class="contact-container">
-  <!-- Contact Form -->
-  <div class="contact-form">
-    <form id="contactForm">
-      <label for="name">Name</label>
-      <input type="text" name="name" required placeholder="Your name" />
-
-      <label for="email">Email</label>
-      <input type="email" name="email" required placeholder="Your email" />
-
-      <label for="message">Message</label>
-      <textarea name="message" rows="6" required placeholder="Your message..."></textarea>
-
-      <button type="submit">Send Message</button>
-      <p id="formStatus" class="form-status"></p>
-    </form>
-  </div>
 
   <!-- Contact Info Side -->
   <div class="contact-info">
@@ -546,26 +530,9 @@
       <span>By Awais Ahmed</span>
     </div>
   </footer>
-  <!-- 📬 EmailJS Script -->
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+ 
   <script>
-    (function() {
-      emailjs.init("We21L8mgG-qydSQLs"); // Your Public Key
-    })();
-
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      emailjs.sendForm('service_14xl2c3', 'template_r0wmvsn', this)
-        .then(function(response) {
-          document.getElementById('formStatus').textContent = "✅ Message sent successfully!";
-          document.getElementById('formStatus').style.color = "lightgreen";
-          e.target.reset();
-        }, function(error) {
-          document.getElementById('formStatus').textContent = "❌ Failed to send message.";
-          document.getElementById('formStatus').style.color = "salmon";
-        });
-    });
+   
 
     // Dark to white mode or vice-versa 
     function toggleMenu() {
