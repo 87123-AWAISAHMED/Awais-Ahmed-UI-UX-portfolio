@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Awais Ahmed – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-color: #0f0c29;
+      --text-color: #f0f0f0;
+      --nav-hover: #4a4a4a;
+      --tooltip-bg: rgba(0, 0, 0, 0.85);
+      --footer-color: #ddd;
+    }
+
+    body.light-mode {
+      --bg-color: #f5f5f5;
+      --text-color: #0f0f0f;
+      --nav-hover: #999;
+      --tooltip-bg: rgba(50, 50, 50, 0.9);
+      --footer-color: #333;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .mesh-bg {
+      position: fixed;
+      top: -100px;
+      left: -100px;
+      width: 200%;
+      height: 200%;
+      z-index: -1;
+      background: radial-gradient(circle at 70% 80%, rgb(239, 114, 30), transparent 50%),
+        radial-gradient(circle at 40% 30%, #5f8cec, transparent 50%),
+        radial-gradient(circle at 40% 20%, #00ffff, transparent 50%),
+        radial-gradient(circle at 50% 80%, #ff6600, transparent 50%);
+      animation: meshMove 10s ease-in-out infinite;
+      filter: blur(100px);
+    }
+
+    @keyframes meshMove {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(-10%, -10%) scale(1.2);
+      }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 35px;
+      font-weight: bolder;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      font-size: 23px;
+      position: relative;
+      margin-right: 20px;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--nav-hover);
+      transition: width 0.3s ease-in-out;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      /* z-index: 1002; */
+    }
+
+    .theme-icon {
+      font-size: 18px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      border-radius: 34px;
+      transition: background-color 0.4s;
+    }
+
+    .slider:before {
+      content: '';
+      position: absolute;
+      height: 26px;
+      width: 26px;
+      left: 3px;
+      bottom: 2px;
+      background-color: white;
+      border-radius: 50%;
+      transition: transform 0.4s ease;
+    }
+
+    input:checked+.slider {
+      background-color: #2196F3;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(26px);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: var(--text-color);
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+
+    .data {
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .data h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      font-family: Montserrat, sans-serif;
+      margin-bottom: 20px;
+      align-self: flex-center;
+      text-align: center;
+    }
+
+    .data h2 {
+      /* font-size: 1.5rem;
+      font-weight: 600; */
+      font-size: 25px;
+      font-weight: 900;
+      margin-bottom: 18px;
+      align-self: flex-center;
+      text-align: center;
+    }
+
+    .data p {
+      /* font-size: 1.2rem;
+      font-weight: 400; */
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1.6;
+      align-self: flex-start;
+      text-align: start;
+    }
+
+    .less-text{
+      align-self: flex-start;
+      text-align: start;
+    }
+
+    .multimedia {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .multimedia img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    audio {
+      width: 100%;
+      /* or 100%, or any size you prefer */
+      max-width: 100%;
+      /* makes it responsive on smaller screens */
+      margin: 10px 0;
+      display: block;
+      /* ensures spacing works properly */
+    }
+
+    /* Read More */
+    /* .more-text {
+      display: flex;
+      justify-content: right;
+      align-self: flex-center;
+      text-align: center;
+    }
+
+    .read-more-btn {
+      color: #dfe0e2;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0;
+      font-size: 16px;
+      display: flex;
+      justify-content: right;
+      align-self: flex-center;
+      text-align: center;
+    } */
+    
+    
+    .more-text {
+  display: none;
+  justify-content: flex-end;
+  align-self: start;
+  text-align: start;
+  
+  font-size: 22px;
+      font-weight: 300;
+}
+
+.read-more-btn {
+  color: #dfe0e2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0;
+  font-size: 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-self: start;
+  text-align: start;
+  margin-top: 8px;
+}
+     /* Read More */
+    /* Carousal */
+    .carousel-container {
+      width: 90%;
+      max-width: 900px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel img {
+      width: 100%;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+
+    .buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .buttons button {
+      background: rgba(0, 0, 0, 0.6);
+      border: none;
+      color: var(--text-color);
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background 0.3s ease;
+    }
+
+    .buttons button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Carousal */
+
+
+    /* iframe  */
+    .iframe-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 40px 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    }
+
+    .iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 20px;
+    }
+
+    /* iframe  */
+    hr {
+      margin: 0 30px;
+      border: none;
+      border-top: 3px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* hi fi proto */
+    .image-container1 {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .image-container1 img {
+      height: 600px;
+      /* 👈 Adjust this value as needed */
+      width: 80%;
+      max-width: 100%;
+      /* object-fit: cover; */
+      border-radius: 5px;
+    }
+
+    /* .image-container img:hover {
+      transform: scale(1.03);
+    } */
+
+
+    .iframe-container {
+      height: 850px;
+      /* 👈 Adjust this value as needed */
+      width: auto;
+      max-width: 100%;
+      /* object-fit: cover; */
+      border-radius: 5px;
+    }
+
+    .iframe-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 900px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* hi fi proto */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 25px;
+      margin: 32px 0;
+      width: 100%;
+    }
+
+    .tooltip-container {
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .tooltip-container:hover {
+      transform: scale(1.03);
+    }
+
+    .tooltip-container img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      display: block;
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--tooltip-bg);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .tooltip-container:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      color: var(--footer-color);
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    .copyright {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      font-size: 16px;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+    @media (max-width: 925px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        position: fixed;
+        top: 0;
+        right: 0;
+        /* background-color: rgba(0, 0, 0, 0.95); */
+        background-color: radial-gradient(circle at 20% 20%, rgb(239, 114, 30), transparent 50%),
+        radial-gradient(circle at 40% 30%, #5f8cec, transparent 50%);
+        backdrop-filter: blur(10px);
+        padding: 60px 20px;
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+        z-index: 1000;
+        height: 100vh;
+        width: 250px;
+      }
+
+      nav.active {
+        transform: translateX(0%);
+      }
+
+      .hamburger {
+        display: flex;
+        margin-left: auto;
+      }
+
+      .theme-toggle {
+        top: 70px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .data h1 {
+        font-size: 28px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .data h2 {
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .data p {
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .multimedia,
+      .User Centered {
+        width: 100%;
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+      }
+
+      audio {
+        width: 100%;
+      }
+
+      .more-text {
+        display: flex;
+        justify-content: right;
+        /* align-self: flex-center; */
+        align-self: start;
+        text-align: start;
+        font-size: 16px;
+      }
+
+      /* .read-more-btn {
+        color: #dfe0e2;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 0;
+        font-size: 16px;
+        display: flex;
+        justify-content: left;
+        align-self: flex-center;
+        text-align: center;
+        margin-top: 250px;
+        margin-right: 675px;
+      } */
+
+      /* .read-more-btn {
+        color: #dfe0e2;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 0;
+        font-size: 16px;
+        display: flex;
+        justify-content: flex-start; */
+        /* aligns it to the left */
+        /* align-self: flex-start;
+        text-align: left;
+        margin: 8px 0 0 0; */
+        /* top margin for a little spacing */
+      /* } */
+     
+
+      .read-more-btn {
+    justify-content: flex-start;
+    align-self: flex-start;
+    text-align: left;
+    margin: 8px 0 0 0;
+  }
+
+
+
+      /* carousal */
+      .buttons button {
+        padding: 8px 12px;
+        font-size: 16px;
+      }
+
+      /* carousal */
+
+      /* hi fi proto  */
+      .image-container1 {
+        /* flex-direction: column; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .image-container1 img {
+        /* width: 50%; */
+        width: 70%;
+        height: 155px;
+      }
+
+
+      iframe {
+        width: 100%;
+        max-width: 800px;
+        height: 100%;
+        max-height: 650px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      /* hi fi proto  */
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="mesh-bg"></div>
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <header>
+    <div class="logo">Awais Ahmed</div>
+    <div class="theme-toggle">
+      <span class="theme-icon">🌙</span>
+      <label class="switch">
+        <input type="checkbox" id="themeSwitch">
+        <span class="slider"></span>
+      </label>
+      <span class="theme-icon">☀️</span>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav id="navLinks">
+        <a href="index.html">Projects</a>
+        <a href="Profile.html">Profile</a>
+        <a href="Contact.html">Contact me</a>
+    </nav>
+  </header>
+
+  <div class="data">
+    <h1>Jitmo: Online Food Delivery Made Easy</h1>
+    <h2>Jitmo is a food delivery website designed to simplify and enhance the online food ordering experience. With a visually appealing interface and user-friendly navigation, Jitmo connects users to a variety of food options—from quick snacks to full-course meals and party platters. The site features responsive design, embedded restaurant links, and interactive service sections. Built using HTML and CSS, this project showcases core front-end development skills while offering a realistic prototype of a modern food delivery platform.</h2>
+   
+  </div>
+
+  <div class="image-container1" >
+      <img src="1.png" alt="Check your internet"> <br> <br>
+      <img src="2.png" alt="Check your internet">
+      <br> <br>
+      <img src="3.png" alt="Check your internet"> <br> <br>
+    </div>
+  </div>
+
+
+
+  <div class="data">
+    <h2> Follow this link to experience the high-fidelity prototype of Jitmo. </h2>
+    <p> <i><a href=" https://87123-awaisahmed.github.io/Jitmo/" style="color: rgb(255, 184, 130);">
+        https://87123-awaisahmed.github.io/Jitmo/ </a></i> </p>
+  </div>
+
+ 
+
+  <!-- hi fi imgs -->
+ 
+
+
+ 
+  <!-- hi fi imgs -->
+
+
+
+  <hr>
+
+  <!-- <div class="gallery">
+    <div class="tooltip-container">
+      <a href="GPay.html"><img src="GPay.png" alt="GPay" /></a>
+      <div class="tooltip">GPay Envelope</div>
+    </div>
+    <div class="tooltip-container">
+      <img src="Carpool.jpg" alt="Carpool" />
+      <div class="tooltip">Carpool Connect</div>
+    </div>
+    <div class="tooltip-container">
+      <img src="Batman.png" alt="Batman" />
+      <div class="tooltip">The UX Knight</div>
+    </div>
+    <div class="tooltip-container">
+      <img src="Jitmo.png" alt="Jitmo" />
+      <div class="tooltip">Jitmo – Fast Delivery App</div>
+    </div>
+    <div class="tooltip-container">
+      <img src="iCoder.jpg" alt="iCoder" />
+      <div class="tooltip">iCoder – Developer Hub</div>
+    </div>
+  </div> -->
+
+
+
+  <div class="gallery">
+    <div class="tooltip-container">
+      <a href="GPay.html"><img src="GPay.png" alt="GPay" /></a>
+      <div class="tooltip">GPay Envelope</div>
+    </div>
+    <div class="tooltip-container">
+      <a href="Carpool.html"> <img src="Carpool.jpg" alt="Carpool" /> </a>
+      <div class="tooltip">Carpool Connect</div>
+    </div>
+    <div class="tooltip-container">
+      <a href="Batman.html">  <img src="Batman.png" alt="Batman" /> </a>
+      <div class="tooltip">The UX Knight</div>
+    </div>
+    <div class="tooltip-container">
+      <a href="iCoder.html">   <img src="iCoder.jpg" alt="iCoder" /> </a>
+      <div class="tooltip">iCoder – Developer Hub</div>
+    </div>
+  </div>
+  <hr>
+
+  <footer>
+    <div class="copyright">
+      <span>©</span>
+      <span>By Awais Ahmed</span>
+    </div>
+  </footer>
+
+  <script>
+    // function toggleMenu() {
+    //   const nav = document.getElementById("navLinks");
+    //   const overlay = document.getElementById("overlay");
+    //   nav.classList.toggle("active");
+    //   overlay.classList.toggle("active");
+    // }
+
+    // const themeSwitch = document.getElementById('themeSwitch');
+    // const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // window.onload = () => {
+    //   const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+    //   document.body.classList.toggle('light-mode', savedTheme === 'light');
+    //   themeSwitch.checked = savedTheme === 'light';
+    // };
+
+    // themeSwitch.addEventListener('change', () => {
+    //   const isLight = themeSwitch.checked;
+    //   document.body.classList.toggle('light-mode', isLight);
+    //   localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    // });
+
+    function toggleMenu() {
+      const nav = document.getElementById("navLinks");
+      const overlay = document.getElementById("overlay");
+      nav.classList.toggle("active");
+      overlay.classList.toggle("active");
+    }
+
+    const themeSwitch = document.getElementById('themeSwitch');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    window.onload = () => {
+      const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+      document.body.classList.toggle('light-mode', savedTheme === 'light');
+      themeSwitch.checked = savedTheme === 'light';
+    };
+
+    themeSwitch.addEventListener('change', () => {
+      const isLight = themeSwitch.checked;
+      document.body.classList.toggle('light-mode', isLight);
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
+
+
+
+    // Audio control
+
+
+    // function toggleReadMore() {
+    //   const dots = document.getElementById("dots");
+    //   const moreText = document.getElementById("more");
+    //   const btnText = document.getElementById("readBtn");
+
+    //   if (dots.style.display === "none") {
+    //     dots.style.display = "inline";
+    //     btnText.textContent = "Read more";
+    //     moreText.style.display = "none";
+    //   } else {
+    //     dots.style.display = "none";
+    //     btnText.textContent = "Read less";
+    //     moreText.style.display = "inline";
+    //   }
+    // }
+
+
+
+    function toggleReadMore() {
+      const dots = document.getElementById("dots");
+      const moreText = document.getElementById("more");
+      const btnText = document.getElementById("readBtn");
+
+      if (moreText.style.display === "none") {
+        dots.style.display = "none";
+        moreText.style.display = "inline";
+        btnText.textContent = "Read less";
+      } else {
+        dots.style.display = "inline";
+        moreText.style.display = "none";
+        btnText.textContent = "Read more";
+      }
+    }
+
+    // Audio control
+
+    //carousal 
+    const carousel = document.getElementById('carousel');
+    const totalSlides = carousel.children.length;
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    // Optional: Auto Slide every 5 seconds
+    setInterval(nextSlide, 5000);
+    //carousal 
+  </script>
+</body>
+
+</html>

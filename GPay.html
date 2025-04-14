@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Awais Ahmed – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-color: #0f0c29;
+      --text-color: #f0f0f0;
+      --nav-hover: #4a4a4a;
+      --tooltip-bg: rgba(0, 0, 0, 0.85);
+      --footer-color: #ddd;
+    }
+
+    body.light-mode {
+      --bg-color: #f5f5f5;
+      --text-color: #0f0f0f;
+      --nav-hover: #999;
+      --tooltip-bg: rgba(50, 50, 50, 0.9);
+      --footer-color: #333;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .mesh-bg {
+      position: fixed;
+      top: -100px;
+      left: -100px;
+      width: 200%;
+      height: 200%;
+      z-index: -1;
+      background: radial-gradient(circle at 70% 80%, rgb(239, 114, 30), transparent 50%),
+        radial-gradient(circle at 40% 30%, #5f8cec, transparent 50%),
+        radial-gradient(circle at 40% 20%, #00ffff, transparent 50%),
+        radial-gradient(circle at 50% 80%, #ff6600, transparent 50%);
+      animation: meshMove 10s ease-in-out infinite;
+      filter: blur(100px);
+    }
+
+    @keyframes meshMove {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(-10%, -10%) scale(1.2);
+      }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 35px;
+      font-weight: bolder;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      font-size: 23px;
+      position: relative;
+      margin-right: 20px;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--nav-hover);
+      transition: width 0.3s ease-in-out;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      /* z-index: 1002; */
+    }
+
+    .theme-icon {
+      font-size: 18px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      border-radius: 34px;
+      transition: background-color 0.4s;
+    }
+
+    .slider:before {
+      content: '';
+      position: absolute;
+      height: 26px;
+      width: 26px;
+      left: 3px;
+      bottom: 2px;
+      background-color: white;
+      border-radius: 50%;
+      transition: transform 0.4s ease;
+    }
+
+    input:checked+.slider {
+      background-color: #2196F3;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(26px);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: var(--text-color);
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+
+    .data {
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .data h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      font-family: Montserrat, sans-serif;
+      margin-bottom: 20px;
+      align-self: flex-center;
+      text-align: center;
+    }
+
+    .data h2 {
+      /* font-size: 1.5rem;
+      font-weight: 600; */
+      font-size: 25px;
+      font-weight: 900;
+      margin-bottom: 18px;
+      align-self: flex-center;
+      text-align: center;
+    }
+
+    .data p {
+      /* font-size: 1.2rem;
+      font-weight: 400; */
+      font-size: 24px;
+      font-weight: 300;
+      line-height: 1.6;
+      align-self: flex-start;
+      text-align: start;
+    }
+
+    .less-text{
+      align-self: flex-start;
+      text-align: start;
+    }
+
+    .multimedia {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .multimedia img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    audio {
+      width: 100%;
+      /* or 100%, or any size you prefer */
+      max-width: 100%;
+      /* makes it responsive on smaller screens */
+      margin: 10px 0;
+      display: block;
+      /* ensures spacing works properly */
+    }
+
+    /* Read More */
+    /* .more-text {
+      display: flex;
+      justify-content: right;
+      align-self: flex-center;
+      text-align: center;
+    }
+
+    .read-more-btn {
+      color: #dfe0e2;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0;
+      font-size: 16px;
+      display: flex;
+      justify-content: right;
+      align-self: flex-center;
+      text-align: center;
+    } */
+    
+    
+    /* .more-text {
+  display: none;
+  justify-content: flex-end;
+  align-self: start;
+  text-align: start;
+  
+  font-size: 22px;
+      font-weight: 300;
+} */
+
+/* .read-more-btn {
+  color: #dfe0e2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0;
+  font-size: 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-self: start;
+  text-align: start;
+  margin-top: 8px;
+} */
+.more-text {
+  display: none;
+  font-size: 22px;
+  font-weight: 300;
+  text-align: start;
+}
+
+.read-more-btn {
+  color: #dfe0e2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 8px;
+  text-align: left;
+}
+
+
+     /* Read More */
+    /* Carousal */
+    .carousel-container {
+      width: 90%;
+      max-width: 900px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel img {
+      width: 100%;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+
+    .buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .buttons button {
+      background: rgba(0, 0, 0, 0.6);
+      border: none;
+      color: var(--text-color);
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      transition: background 0.3s ease;
+    }
+
+    .buttons button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Carousal */
+
+
+    /* iframe  */
+    .iframe-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 40px 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    }
+
+    .iframe-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 20px;
+    }
+
+    /* iframe  */
+    hr {
+      margin: 0 30px;
+      border: none;
+      border-top: 3px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* hi fi proto */
+    .image-container {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .image-container img {
+      height: 400px;
+      /* 👈 Adjust this value as needed */
+      width: 30vh;
+      max-width: 100%;
+      /* object-fit: cover; */
+      border-radius: 5px;
+    }
+
+    /* .image-container img:hover {
+      transform: scale(1.03);
+    } */
+
+
+    .iframe-container {
+      height: 850px;
+      /* 👈 Adjust this value as needed */
+      width: auto;
+      max-width: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .iframe-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 900px;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* hi fi proto */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 25px;
+      margin: 32px 0;
+      width: 100%;
+    }
+
+    .tooltip-container {
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .tooltip-container:hover {
+      transform: scale(1.03);
+    }
+
+    .tooltip-container img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      display: block;
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--tooltip-bg);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .tooltip-container:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      color: var(--footer-color);
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    .copyright {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      font-size: 16px;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+    @media (max-width: 925px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        position: fixed;
+        top: 0;
+        right: 0;
+        /* background-color: rgba(0, 0, 0, 0.95); */
+        background-color: radial-gradient(circle at 20% 20%, rgb(239, 114, 30), transparent 50%),
+        radial-gradient(circle at 40% 30%, #5f8cec, transparent 50%);
+        backdrop-filter: blur(10px);
+        padding: 60px 20px;
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+        z-index: 1000;
+        height: 100vh;
+        width: 250px;
+      }
+
+      nav.active {
+        transform: translateX(0%);
+      }
+
+      .hamburger {
+        display: flex;
+        margin-left: auto;
+      }
+
+      .theme-toggle {
+        top: 70px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .data h1 {
+        font-size: 28px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .data h2 {
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .data p {
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .multimedia,
+      .User Centered {
+        width: 100%;
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+      }
+
+      audio {
+        width: 100%;
+      }
+
+      /* .more-text {
+        display: flex;
+        justify-content: right;
+        align-self: start;
+        text-align: start;
+        font-size: 16px;
+        
+      }
+
+      .read-more-btn {
+    justify-content: flex-start;
+    align-self: flex-start;
+    text-align: left;
+    margin: 8px 0 0 0;
+  } */
+
+  .more-text {
+  display: none;
+  font-size: 16px;
+  font-weight: 300;
+  text-align: start;
+}
+
+.read-more-btn {
+  color: #dfe0e2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  /* font-weight: bold; */
+  font-size: 16px;
+  margin-top: 8px;
+  text-align: start;
+}
+
+
+
+      /* carousal */
+      .buttons button {
+        padding: 8px 12px;
+        font-size: 16px;
+      }
+
+      /* carousal */
+
+      /* hi fi proto  */
+      .image-container {
+        /* flex-direction: column; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .image-container img {
+        /* width: 50%; */
+        width: 45%;
+        height: 355px;
+      }
+
+
+      iframe {
+        width: 100%;
+        max-width: 800px;
+        height: 100%;
+        max-height: 650px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      /* hi fi proto  */
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="mesh-bg"></div>
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <header>
+    <div class="logo">Awais Ahmed</div>
+    <div class="theme-toggle">
+      <span class="theme-icon">🌙</span>
+      <label class="switch">
+        <input type="checkbox" id="themeSwitch">
+        <span class="slider"></span>
+      </label>
+      <span class="theme-icon">☀️</span>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav id="navLinks">
+      <a href="index.html">Projects</a>
+      <a href="Profile.html">Profile</a>
+      <a href="Contact.html">Contact me</a>
+    </nav>
+  </header>
+
+  <div class="data">
+    <h1>Google Envelope: Smarter Money Management within Google Pay</h1>
+    <h2>1.0 My Story with Google Pay</h2>
+    <p>As a student managing my pocket money through Google Pay, I struggled to organize funds for different purposes. I
+      was inspired by a podcast where a scenario was discussed about the rapper’s saving habit: before buying anything,
+      he’d save three times the item’s cost to ensure financial stability. Wanting to apply this method, I realized
+      Google Pay lacked a feature to help with structured money management. This motivated me to design Google Envelope
+      — a solution for organizing money into customizable sections, making financial management smarter and more
+      intuitive.</p>
+  </div>
+
+  <div class="data">
+    <h2>2.0 Project Overview</h2>
+    <p>Designing a money organization feature for Google Pay to help users manage their finances more effectively.</p>
+  </div>
+
+
+  <div class="data">
+    <div class="multimedia">
+      <img src="GIF1.gif" alt="Check your internet">
+    </div>
+  </div>
+
+  <div class="data">
+    <h2>2.1 Problem</h2>
+    <p>In Google Pay, users lacked an intuitive way to organize their money for different purposes, making it
+      challenging to track spending across multiple needs. The absence of a built-in feature to categorize funds led to
+      disorganized spending, reduced financial awareness, and difficulty managing budgets for specific goals.</p>
+  </div>
+
+
+  <div class="data">
+    <h2>2.2 Solution</h2>
+    <p>The "Google Envelope" feature introduces customizable money sections within Google Pay, allowing users to create
+      virtual envelopes for different spending categories. This empowers users to better allocate their money, track
+      spending, and achieve financial goals with ease.</p>
+  </div>
+
+
+  <div class="data">
+    <h2>3.0 User Centered Design Process</h2>
+    <p>To ensure the solution truly resonated with real user needs, I adopted a user-centered design process throughout
+      the entire development of the Google Envelope case study — from research and ideation to prototyping and testing.
+    </p>
+  </div>
+
+  <div class="data">
+    <div class="multimedia">
+      <img src="User Centered 1.png" alt="Check your internet">
+    </div>
+  </div>
+
+
+  <div class="data">
+    <h2>3.1 Brainstorm & Ideation</h2>
+    <p>In managing personal finances, especially for students and young adults, there’s often a lack of accessible tools
+      to organize money within digital payment apps. This gap makes it challenging to allocate funds for different
+      purposes, track spending, and build better saving habits. Therefore, we aimed to design a solution for Google Pay
+      that introduces a simple and intuitive envelope system, empowering users to manage their money more effectively
+      and make mindful financial decisions.
+      <br><br>
+      Subsequently, I did user research based on real Users and surveys to define our main target users and features.
+    </p>
+  </div>
+
+
+  <div class="data">
+    <h2>3.2 User Research and Personas</h2>
+    <p>
+      <bold>User research was conducted with three participants. One of them did not grant permission for recording;
+        however, their responses were collected in written format. The remaining two recordings serve as proof of work.
+      </bold>
+    </p>
+    <audio controls <source src="Gpay Phupumma.mp3" type="audio/mp3">
+    </audio>
+  </div>
+  <br>
+  <div class="data">
+    <i>Note:- The above audio recording is in Hindi.
+      To Understand the survey please follow the transcribe given below.</i>
+    <br>
+    <p>
+      <span class="less-text">
+        👨🏻:Assalamu'Alaikum Phupumma <br>
+        👩🏻:Walakum' Asalam Awais <br>
+        👩🏻:Yes Awais <br>
+        👨🏻:How are you Phupumma? <br>
+        👩🏻:I'm doing Good. <br>
+        👨🏻:Are you busy right Now? <br>
+      </span>
+    </p>
+    <span id="dots">...</span>
+    <span id="more" class="more-text">
+      <br>
+      👩🏻:No not at all I'm just walking. During lunch hours I walk around my office. It's like jungle all around my
+      office. <br>
+      👨🏻:Okay <br>
+      👩🏻:I saw your call and thought to call you later. But then I picked your call. It's okay we can talk <br>
+      👨🏻:So, we can talk. Right? <br>
+      👩🏻: Yes Yes go ahead <br>
+      👨🏻:Okay, Currently you are a Civil Engineer working on which post? <br>
+      👩🏻:As an Executive Engineer is used in irrigation department. Different offices use different terms for this
+      position according to them. But according to my deparment I'm a research Officer (Executive Engineer) <br>
+      👨🏻: Masha' Allah it's a big post. <br>
+      👩🏻: Yes exactly <br>
+      👨🏻:So, how much is your networth? <br>
+      👩🏻:Networth? According to what parameters? (Hesitant to dislose networth) <br>
+      👨🏻:Just your overall Networth <br>
+      👩🏻:Are you asking amount? <br>
+      👨🏻:Yes <br>
+      👩🏻:Are you asking my salary? <br>
+      👨🏻:Yes <br>
+      👩🏻:Monthly it's 2Lakhs after deductions <br>
+      👨🏻:I was just kidding by asking you about the networth. Personally I didn't want to know about your
+      networth/salary. Just friendly I have asked you. <br>
+      👩🏻:Hmm <br>
+      👨🏻:Actually If we talk to the point. I'm conducting a survey and that survey is based on cashless society. <br>
+      👩🏻:Which society? cashless? <br>
+      👨🏻:Basically the online payment which we are using. where no physical cash is used, directly cash is paid via
+      online. <br>
+      👩🏻: Yea yae <br>
+      👨🏻:So, from that point of view I would like to have some details from you. <br>
+      👩🏻:Yes go ahead. I can speak about it. <br>
+      👩🏻:I'm in favour of cashless society. If I would be honest with you I love cashless system. <br>
+      👩🏻:Or else If I would carry cash in my purse while office hours and all day I have to worry about the cash. And
+      as I'm walking around my office and away from my place I would be worrying about the cash in my purse. <br>
+      👨🏻: Yes Yes <br>
+      👩🏻:But now I go around with no worries. <br>
+      👨🏻:So, you are convenient with online payment. <br>
+      👩🏻:Yes 100%. Not exaclty 100%. As there are frauds over online. Moreover people make calls and hack.
+      Subsequently, empty the bank accounts. For that I feel we need to be cautious. So, tell now nothing has ahppend to
+      me. <br>
+      👨🏻:Alhumdulillah. Thank God <br>
+      👨🏻:Online payments do have advantages and disadvantages. But at the end of the day you are convenient with the
+      online payment. Right? <br>
+      👩🏻: Yes, Exactly I'm onvenient with the online payment. And I love It. As, I can move stress free from carriyng
+      cash or worrying about change. <br>
+      👩🏻:Whole life is just on one button. <br>
+      👨🏻:On a regular basis which online payment app do you use the most? <br>
+      👩🏻:Google pay <br>
+      👨🏻:That's nice <br>
+      👨🏻:If you are convenient. I'm not taking any personal details. On a day to day basis How do you get the Google
+      pay in your use? For example grocery or anything else. Following with that can you give a rough idea about it.
+      <br>
+      👩🏻:I do all the shopping on google pay as you groceries, online shopping, or If I would have to transfer money,
+      Mobile recharge. For all this I use Google pay. <br>
+      👩🏻:Adding on to that this morning swiggy guy came to deliver the food and asked for tip. I said I don't have
+      cash. Then He asked me to transfer it via online. So, this is how even for tip payment is done online. <br>
+      👨🏻: Before this (online payment) was introduced how did you used to manage your finances. This is my assumption
+      that you might have written all your expenditure on paper. Then as your fiancial status improved (as more cash
+      came in). Or else let's you might have kept the money in shelves of the locker which you used to bring home and
+      organise the money different shelves as per the expenditure (seperate for grocery, bills or charity and so on so
+      forth). <br>
+      👩🏻: Yes instead of shelves I used to keep it (Money) in envelopes. <br>
+      👨🏻: So, there is no system available for online payment app's to arrange or organise your money. Indeed you can
+      get the transaction history and you can make a note of it. And note in the sense If you made a payment to your
+      servant, You can add a note to that transaction. But their is no structured system available for the requirement.
+      <br>
+      👨🏻: Suppose this kind of kind of system is introduced to you in your app How will it convenient for you and your
+      life? <br>
+      👩🏻:Indeed it will be very convenient for me If such feature gets introduced in future. For sure it will make my
+      life more easy. And it impacts efficiently in the month of Ramadhan, As for Zakat (Manadatory charity to be made
+      in a year) since it's a big amount for us and for other expenditures.So if such kind of feature is introduced to
+      me then it will be very convenient for me specially during the month of ramadhan. <br>
+      👩🏻: So are you working any project for that feature? <br>
+      👨🏻:Yes I'm working on this project. <br>
+      👩🏻:Your Idea is wonderful <br>
+      👨🏻:Thank you Jazakallah hu khair Phupumma <br>
+      👨🏻: I was discussing this idea with you. You might have made an imaginery picture about it. Accordingly can
+      explain about it like how should it (Envelope feature) look like <br>
+      👩🏻:I imagined the feature as where we put money in our account. The surface/feature should have unique number or
+      else a name (Example miscellenious) to be given to the envelope by us manually following we must be able to add
+      money in that envelope. For example If I would open an envelope named charity all the amount should be fixed and
+      managed in charity and it shouldn't be disturbed. <br>
+      👨🏻:So, basically you must be able to render around the feature. As you can open a desktop folder and further you
+      can add/delete folders in it following with that you can be able to organize/optimize it. Right? <br>
+      👨🏻:Thank you phupumma for your opinions/reviews. <br>
+      👩🏻:Besides I'm very happy that you have taken a very good topic because I never thought of such feature. Just I
+      Used to think like It was less stressful when I used to keep money in envelope. And now all the money is at one
+      place, It never came in my mind that we can do the same envelope system to bank as well. <br>
+      👩🏻: The moment I open my bank and when I see 5 lakhs in account. But the whole amount is not mine because as we
+      give charity (That belongs to the needy people). And we cannot feel happy that that the full amount belongs to me.
+      So if we can set a seperate block to keep the money in it so that it shouldn't show me that the money belongs to
+      me and remain in that block where the remaining amount should show to us as ours with set we can use freely. <br>
+      👨🏻: Thank you phupumma <br>
+      👩🏻: Ok Awais Bye <br>
+      👨🏻:Ok Bye <br>
+    </span>
+    <button onclick="toggleReadMore()" id="readBtn" class="read-more-btn">Read more</button>
+    </p>
+  </div>
+  <br> <br>
+  <div class="data">
+    <audio controls>
+      <source src="Gpay Anjum Didi.mp3" type="audio/mp3">
+    </audio>
+
+    <p>The personas are defined based on Real Time Users (Above Recordings Illustrates the proof of work) and survey
+      findings:
+    </p>
+  </div>
+
+  <!-- carousal -->
+  <div class="data">
+    <div class="carousel-container">
+      <div class="carousel" id="carousel">
+        <img src="Persona 1.1.png" alt="Persona 1 (Ayesha)" />
+        <img src="Persona 1.2.png" alt="Persona 2 (Sanya)" />
+        <img src="Persona 1.3.png" alt="Persona 3 (Zubair Ali)" />
+      </div>
+      <div class="buttons">
+        <button onclick="prevSlide()">&#10094;</button>
+        <button onclick="nextSlide()">&#10095;</button>
+      </div>
+    </div>
+  </div>
+  <!-- carousal -->
+
+  <div class="data">
+    <h2>3.3 Sketch (Low-Fi Prototype)</h2>
+    <p>I did all sketch with different ideas and then sit to finalize which sketch feature will be shown on the final
+      prototype.
+    </p>
+  </div>
+
+  <div class="data">
+    <div class="multimedia">
+      <img src="WIreframe1.png" alt="Check your internet">
+    </div>
+  </div>
+
+
+  <div class="data">
+    <h2>3.4 Hi-Fi Prototype</h2>
+    <p>Explore this link to experience the high-fidelity prototype of Google Envelope, where you can interact with the
+      innovative money management features designed to simplify budgeting and enhance financial control within Google
+      Pay. </p>
+    <p> <i><a href=" https://87123-awaisahmed.github.io/GPay-Envelope/index.html" style="color: rgb(255, 184, 130);">
+        https://87123-awaisahmed.github.io/GPay-Envelope/index.html </a></i> </p>
+  </div>
+
+
+  <!-- hi fi imgs -->
+  <div class="image-container">
+    <img src="Img 1.1.png" alt="Image 1.1" />
+    <img src="Img 1.2.png" alt="Image 1.2" />
+    <img src="Img 1.3.png" alt="Image 1.3" />
+    <img src="Img 1.4.png" alt="Image 1.4" />
+    <img src="Img 1.5.png" alt="Image 1.5" />
+    <img src="Img 1.6.png" alt="Image 1.6" />
+    <img src="Img 1.7.png" alt="Image 1.7" />
+  </div>
+
+
+  <div class="iframe-container">
+    <iframe src="https://87123-awaisahmed.github.io/GPay-Envelope/index.html" allowfullscreen></iframe>
+  </div>
+  <!-- hi fi imgs -->
+
+
+  <div class="data">
+    <h2>3.5 Usability Test & Feedback</h2>
+    <p>We tested our prototype with 3 users and it was done individually and remotely to find their true reaction whether our products meets user expectations. Usability test helped me get better on it. </p> <br>
+    <h2>Improvements</h2>
+    <p>• Added QR Code option to pay money Via Envelopes <br>
+       •	Improved the branding by adding the color palette used by Google
+      </p> <br>
+    <h2>Feedback</h2>
+    <p>•	The concept was very neat and clean design <br>
+       •	Very easy to use<br>
+       •	Easy method for organizing money<br>
+       •	User friendly<br>
+      </p>
+      
+    
+  </div>
+
+
+
+
+
+
+  <hr>
+
+  <!-- <div class="gallery">
+    <div class="tooltip-container">
+      <a href="GPay.html"><img src="GPay.png" alt="GPay" /></a>
+      <div class="tooltip">GPay Envelope</div>
+    </div>
+    <div class="tooltip-container">
+      <img src="Carpool.jpg" alt="Carpool" />
+      <div class="tooltip">Carpool Connect</div>
+    </div>
+    <div class="tooltip-container">
+      <img src="Batman.png" alt="Batman" />
+      <div class="tooltip">The UX Knight</div>
+    </div>
+    <div class="tooltip-container">
+      <img src="Jitmo.png" alt="Jitmo" />
+      <div class="tooltip">Jitmo – Fast Delivery App</div>
+    </div>
+    <div class="tooltip-container">
+      <img src="iCoder.jpg" alt="iCoder" />
+      <div class="tooltip">iCoder – Developer Hub</div>
+    </div>
+  </div> -->
+
+
+
+  <div class="gallery">
+    
+    <div class="tooltip-container">
+      <a href="Carpool.html"> <img src="Carpool.jpg" alt="Carpool" /> </a>
+      <div class="tooltip">Carpool Connect</div>
+    </div>
+    <div class="tooltip-container">
+      <a href="Batman.html">  <img src="Batman.png" alt="Batman" /> </a>
+      <div class="tooltip">The UX Knight</div>
+    </div>
+    <div class="tooltip-container">
+      <a href="Jitmo.html">  <img src="Jitmo.png" alt="Jitmo" /> </a>
+      <div class="tooltip">Jitmo – Fast Delivery App</div>
+    </div>
+    <div class="tooltip-container">
+      <a href="iCoder.html">   <img src="iCoder.jpg" alt="iCoder" /> </a>
+      <div class="tooltip">iCoder – Developer Hub</div>
+    </div>
+  </div>
+  <hr>
+
+  <footer>
+    <div class="copyright">
+      <span>©</span>
+      <span>By Awais Ahmed</span>
+    </div>
+  </footer>
+
+  <script>
+    
+
+    function toggleMenu() {
+      const nav = document.getElementById("navLinks");
+      const overlay = document.getElementById("overlay");
+      nav.classList.toggle("active");
+      overlay.classList.toggle("active");
+    }
+
+    const themeSwitch = document.getElementById('themeSwitch');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    window.onload = () => {
+      const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+      document.body.classList.toggle('light-mode', savedTheme === 'light');
+      themeSwitch.checked = savedTheme === 'light';
+    };
+
+    themeSwitch.addEventListener('change', () => {
+      const isLight = themeSwitch.checked;
+      document.body.classList.toggle('light-mode', isLight);
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+
+
+
+
+    // Audio control
+
+    // function toggleReadMore() {
+    //   const dots = document.getElementById("dots");
+    //   const moreText = document.getElementById("more");
+    //   const btnText = document.getElementById("readBtn");
+
+    //   if (moreText.style.display === "none") {
+    //     dots.style.display = "none";
+    //     moreText.style.display = "inline";
+    //     btnText.textContent = "Read less";
+    //   } else {
+    //     dots.style.display = "inline";
+    //     moreText.style.display = "none";
+    //     btnText.textContent = "Read more";
+    //   }
+    // }
+
+    function toggleReadMore() {
+  const dots = document.getElementById("dots");
+  const moreText = document.getElementById("more");
+  const btnText = document.getElementById("readBtn");
+
+  if (moreText.style.display === "block") {
+    dots.style.display = "inline";
+    moreText.style.display = "none";
+    btnText.textContent = "Read more";
+  } else {
+    dots.style.display = "none";
+    moreText.style.display = "block"; // 👈 Fix here
+    btnText.textContent = "Read less";
+  }
+}
+
+    
+
+
+
+
+    // Audio control
+
+    //carousal 
+    const carousel = document.getElementById('carousel');
+    const totalSlides = carousel.children.length;
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    // Optional: Auto Slide every 15 seconds
+    setInterval(nextSlide, 15000);
+    //carousal 
+  </script>
+</body>
+
+</html>

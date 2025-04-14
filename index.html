@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Awais Ahmed – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-color: #0f0c29;
+      --text-color: #f0f0f0;
+      --nav-hover: #4a4a4a;
+      --tooltip-bg: rgba(0, 0, 0, 0.85);
+      --footer-color: #ddd;
+    }
+
+    body.light-mode {
+      --bg-color: #f5f5f5;
+      --text-color: #0f0f0f;
+      --nav-hover: #999;
+      --tooltip-bg: rgba(50, 50, 50, 0.9);
+      --footer-color: #333;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .mesh-bg {
+      position: fixed;
+      top: -100px;
+      left: -100px;
+      width: 200%;
+      height: 200%;
+      z-index: -1;
+      /* background: radial-gradient(circle at 70% 80%, #3cf764, transparent 50%), */
+      background: radial-gradient(circle at 70% 80%, rgb(239, 114, 30), transparent 50%),
+                  radial-gradient(circle at 40% 30%, #5f8cec, transparent 50%),
+                  radial-gradient(circle at 40% 20%, #00ffff, transparent 50%),
+                  radial-gradient(circle at 50% 80%, #ff6600, transparent 50%);
+      animation: meshMove 10s ease-in-out infinite;
+      filter: blur(100px);
+    }
+
+    @keyframes meshMove {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-10%, -10%) scale(1.2); }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      position: relative;
+      z-index: 1001;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 35px;
+      font-weight: bolder;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      font-size: 23px;
+      position: relative;
+      margin-right: 20px;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--nav-hover);
+      transition: width 0.3s ease-in-out;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      /* z-index: 1002; */
+    }
+
+    .theme-icon {
+      font-size: 18px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      border-radius: 34px;
+      transition: background-color 0.4s;
+    }
+
+    .slider:before {
+      content: '';
+      position: absolute;
+      height: 26px;
+      width: 26px;
+      left: 3px;
+      bottom: 2px;
+      background-color: white;
+      border-radius: 50%;
+      transition: transform 0.4s ease;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: var(--text-color);
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+
+    .intro {
+      padding: 40px 20px;
+      max-width: 100%;
+    }
+
+    .intro h2 {
+      font-size: 25px;
+      font-weight: 900;
+      font-style:Montserrat;
+      margin-bottom: 10px;
+      padding-left: 20px;
+    }
+
+    .intro p {
+      font-size: 24px;
+      font-weight: 300;
+      max-width: 1000px;
+      line-height: 1.2;
+      padding-left: 20px;
+    }
+
+    hr {
+      margin: 0 30px;
+      border: none;
+      border-top: 3px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 25px;
+      margin: 32px 0;
+      width: 100%;
+    }
+
+    .tooltip-container {
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .tooltip-container:hover {
+      transform: scale(1.03);
+    }
+
+    .tooltip-container img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      display: block;
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background-color: var(--tooltip-bg);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .tooltip-container:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      color: var(--footer-color);
+      font-size: 14px;
+      margin-top: auto;
+    }
+
+    .copyright {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      font-size: 16px;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+    @media (max-width: 925px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        position: fixed;
+        top: 0;
+        right: 0;
+        /* background-color: rgba(99, 99, 99, 0.95); */
+        background-color: radial-gradient(circle at 20% 20%, rgb(239, 114, 30), transparent 50%),
+        radial-gradient(circle at 40% 30%, #5f8cec, transparent 50%),;
+        /* color: white; */
+        backdrop-filter: blur(3px);
+        padding: 60px 20px;
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+        z-index: 1000;
+        height: 100vh;
+        width: 250px;
+      }
+
+      nav.active {
+        transform: translateX(0%);
+        color: white;
+      }
+
+      .hamburger {
+        display: flex;
+        margin-left: auto;
+        color: white;
+      }
+
+      .theme-toggle {
+        top: 70px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mesh-bg"></div>
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <header>
+    <div class="logo">Awais Ahmed</div>
+
+    <div class="theme-toggle">
+      <span class="theme-icon">🌙</span>
+      <label class="switch">
+        <input type="checkbox" id="themeSwitch">
+        <span class="slider"></span>
+      </label>
+      <span class="theme-icon">☀️</span>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <nav id="navLinks">
+      <a href="index.html">Projects</a>
+      <a href="Profile.html">Profile</a>
+      <a href="Contact.html">Contact me</a>
+    </nav>
+  </header>
+
+  <div class="intro">
+    <h2>DesignCraft – Awais Ahmed</h2>
+    <p>Hi, I’m Awais Ahmed — a dedicated UI/UX Designer focused on creating seamless and engaging digital interfaces. This portfolio showcases my process-driven approach through selected projects, prototypes, and user-centered designs. I invite you to explore and get in touch!</p>
+  </div>
+
+  <hr>
+
+  <div class="gallery">
+    <div class="tooltip-container">
+      <a href="GPay.html"><img src="GPay.png" alt="GPay" /></a>
+      <div class="tooltip">GPay Envelope</div>
+    </div>
+    <div class="tooltip-container">
+      <a href="Carpool.html"> <img src="Carpool.jpg" alt="Carpool" /> </a>
+      <div class="tooltip">Carpool Connect</div>
+    </div>
+    <div class="tooltip-container">
+      <a href="Batman.html">  <img src="Batman.png" alt="Batman" /> </a>
+      <div class="tooltip">The UX Knight</div>
+    </div>
+    <div class="tooltip-container">
+      <a href="Jitmo.html">  <img src="Jitmo.png" alt="Jitmo" /> </a>
+      <div class="tooltip">Jitmo – Fast Delivery App</div>
+    </div>
+    <div class="tooltip-container">
+      <a href="iCoder.html">   <img src="iCoder.jpg" alt="iCoder" /> </a>
+      <div class="tooltip">iCoder – Developer Hub</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <footer>
+    <div class="copyright">
+      <span>©</span>
+      <span>By Awais Ahmed</span>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById("navLinks");
+      const overlay = document.getElementById("overlay");
+      nav.classList.toggle("active");
+      overlay.classList.toggle("active");
+    }
+
+    const themeSwitch = document.getElementById('themeSwitch');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    window.onload = () => {
+      const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+      document.body.classList.toggle('light-mode', savedTheme === 'light');
+      themeSwitch.checked = savedTheme === 'light';
+    };
+
+    themeSwitch.addEventListener('change', () => {
+      const isLight = themeSwitch.checked;
+      document.body.classList.toggle('light-mode', isLight);
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>
